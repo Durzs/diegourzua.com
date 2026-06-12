@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diego Urzúa Escobar · 道 学 新</title>
+<meta name="description" content="Diego Urzúa Escobar, psicólogo educacional, investigador y facilitador. Atención plena, tecnología y academia.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ============ VARIABLES ============ */
+  :root {
+    --paper: #f6f2ea;
+    --paper-2: #efe9dd;
+    --ink: #1c1a17;
+    --ink-soft: #4a463f;
+    --ink-faint: #8a847a;
+    --vermillion: #b3402a;       /* sello / hanko */
+    --jade: #2e6e5e;             /* acento tech-jade */
+    --jade-bright: #3d9579;
+    --line: rgba(28, 26, 23, 0.12);
+    --card: rgba(255, 255, 255, 0.55);
+    --card-border: rgba(28, 26, 23, 0.08);
+    --grid: rgba(28, 26, 23, 0.035);
+    --shadow: 0 20px 60px -25px rgba(28, 26, 23, 0.25);
+    --serif: 'Cormorant Garamond', 'Noto Serif SC', serif;
+    --sans: 'Inter', 'Noto Serif SC', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+  [data-theme="dark"] {
+    --paper: #12110f;
+    --paper-2: #1a1814;
+    --ink: #ece7dc;
+    --ink-soft: #b8b1a3;
+    --ink-faint: #7c766b;
+    --vermillion: #d4593f;
+    --jade: #4fa98a;
+    --jade-bright: #63c2a0;
+    --line: rgba(236, 231, 220, 0.14);
+    --card: rgba(255, 255, 255, 0.04);
+    --card-border: rgba(236, 231, 220, 0.09);
+    --grid: rgba(236, 231, 220, 0.04);
+    --shadow: 0 20px 60px -25px rgba(0, 0, 0, 0.7);
+  }
+
+  /* ============ BASE ============ */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    font-weight: 300;
+    transition: background 0.6s ease, color 0.6s ease;
+    overflow-x: hidden;
+  }
+  body.lang-zh { line-height: 1.9; }
+  body.lang-zh h1, body.lang-zh h2, body.lang-zh h3 { font-family: 'Noto Serif SC', serif; }
+
+  /* fondo: grilla tech sutil + textura papel */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: -2;
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 90% 80% at 50% 20%, black 30%, transparent 90%);
+    -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 20%, black 30%, transparent 90%);
+  }
+
+  ::selection { background: var(--vermillion); color: var(--paper); }
+
+  h1, h2, h3 { font-family: var(--serif); font-weight: 600; line-height: 1.2; }
+  a { color: inherit; }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+
+  /* ============ HEADER ============ */
+  header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    background: color-mix(in srgb, var(--paper) 75%, transparent);
+    border-bottom: 1px solid var(--line);
+    transition: background 0.6s ease;
+  }
+  .header-inner {
+    max-width: 1080px; margin: 0 auto; padding: 14px 28px;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .logo-enso { width: 34px; height: 34px; flex-shrink: 0; }
+  .logo-enso circle {
+    fill: none; stroke: var(--ink); stroke-width: 7;
+    stroke-linecap: round; stroke-dasharray: 270 300;
+    transform: rotate(-80deg); transform-origin: center;
+  }
+  .logo-name { font-family: var(--serif); font-size: 1.15rem; font-weight: 600; letter-spacing: 0.04em; }
+  .logo-name span { color: var(--vermillion); }
+
+  nav { display: flex; gap: 26px; }
+  nav a {
+    text-decoration: none; font-size: 0.82rem; letter-spacing: 0.08em;
+    color: var(--ink-soft); text-transform: uppercase; font-weight: 400;
+    position: relative; padding: 4px 0;
+  }
+  nav a .zi { font-family: 'Noto Serif SC', serif; color: var(--vermillion); margin-right: 5px; font-size: 0.9rem; }
+  nav a::after {
+    content: ''; position: absolute; left: 0; bottom: 0; width: 0; height: 1px;
+    background: var(--vermillion); transition: width 0.35s ease;
+  }
+  nav a:hover::after { width: 100%; }
+
+  .controls { display: flex; align-items: center; gap: 10px; }
+  .lang-switch {
+    display: flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden;
+    font-family: var(--mono); font-size: 0.72rem;
+  }
+  .lang-switch button {
+    background: none; border: none; color: var(--ink-faint); cursor: pointer;
+    padding: 6px 11px; font-family: inherit; font-size: inherit;
+    transition: all 0.3s ease;
+  }
+  .lang-switch button.active { background: var(--ink); color: var(--paper); }
+  .lang-switch button:not(.active):hover { color: var(--ink); }
+
+  .theme-btn {
+    background: none; border: 1px solid var(--line); border-radius: 999px;
+    width: 34px; height: 34px; cursor: pointer; color: var(--ink-soft);
+    display: grid; place-items: center; font-size: 0.95rem;
+    transition: all 0.3s ease;
+  }
+  .theme-btn:hover { border-color: var(--vermillion); color: var(--vermillion); transform: rotate(40deg); }
+
+  /* ============ HERO ============ */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center;
+    position: relative; padding: 120px 0 80px;
+  }
+  .hero-enso {
+    position: absolute; right: -8%; top: 50%; transform: translateY(-50%);
+    width: min(62vw, 640px); height: min(62vw, 640px);
+    z-index: -1; opacity: 0.95;
+  }
+  .hero-enso .enso {
+    fill: none; stroke: var(--ink); stroke-width: 3.4;
+    stroke-linecap: round; opacity: 0.13;
+    stroke-dasharray: 1700; stroke-dashoffset: 1700;
+    animation: drawEnso 3.2s cubic-bezier(0.6, 0, 0.3, 1) 0.4s forwards;
+  }
+  @keyframes drawEnso { to { stroke-dashoffset: 60; } }
+
+  .hero-enso .portrait-img {
+    opacity: 0;
+    animation: portraitIn 1.8s ease 1.3s forwards;
+  }
+  [data-theme="light"] .hero-enso .portrait-img { filter: invert(1); }
+  @keyframes portraitIn { to { opacity: 0.88; } }
+
+  .hero-kanji {
+    position: absolute; right: 36px; top: 50%; transform: translateY(-50%);
+    writing-mode: vertical-rl; font-family: 'Noto Serif SC', serif;
+    font-size: 1.5rem; letter-spacing: 1.1em; color: var(--ink-faint);
+    opacity: 0; animation: fadeIn 2s ease 1.8s forwards;
+    user-select: none;
+  }
+  .hero-kanji b { color: var(--vermillion); font-weight: 500; }
+  @keyframes fadeIn { to { opacity: 0.75; } }
+
+  .hero-content { max-width: 720px; }
+  .hero-pre {
+    font-family: var(--mono); font-size: 0.8rem; color: var(--jade);
+    margin-bottom: 22px; letter-spacing: 0.05em;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .hero-pre::before { content: ''; width: 36px; height: 1px; background: var(--jade); }
+  .cursor { display: inline-block; width: 8px; height: 1.05em; background: var(--jade); vertical-align: text-bottom; animation: blink 1.1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  .hero h1 {
+    font-size: clamp(2.8rem, 7vw, 5.2rem); font-weight: 500;
+    letter-spacing: 0.01em; margin-bottom: 8px;
+  }
+  .hero h1 em { font-style: italic; color: var(--vermillion); }
+  .hero-role {
+    font-family: var(--serif); font-size: clamp(1.15rem, 2.6vw, 1.55rem);
+    color: var(--ink-soft); font-weight: 400; font-style: italic; margin-bottom: 26px;
+  }
+  .hero-tagline {
+    font-size: 1.02rem; color: var(--ink-soft); max-width: 540px; margin-bottom: 40px;
+  }
+  .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .btn {
+    text-decoration: none; font-size: 0.85rem; letter-spacing: 0.06em;
+    padding: 13px 30px; border-radius: 2px; font-weight: 500;
+    transition: all 0.35s ease; display: inline-block;
+  }
+  .btn-primary { background: var(--ink); color: var(--paper); border: 1px solid var(--ink); }
+  .btn-primary:hover { background: var(--vermillion); border-color: var(--vermillion); transform: translateY(-2px); }
+  .btn-ghost { border: 1px solid var(--line); color: var(--ink-soft); }
+  .btn-ghost:hover { border-color: var(--jade); color: var(--jade); transform: translateY(-2px); }
+
+  /* sello hanko */
+  .seal {
+    width: 58px; height: 58px; background: var(--vermillion); border-radius: 6px;
+    display: grid; place-items: center; color: #f6f2ea;
+    font-family: 'Noto Serif SC', serif; font-size: 1.7rem; font-weight: 700;
+    box-shadow: var(--shadow); transform: rotate(-4deg);
+    margin-top: 56px; user-select: none;
+    position: relative;
+  }
+  .seal::after {
+    content: ''; position: absolute; inset: 4px;
+    border: 1.5px solid rgba(246, 242, 234, 0.55); border-radius: 3px;
+  }
+
+  .scroll-hint {
+    position: absolute; bottom: 34px; left: 50%; transform: translateX(-50%);
+    font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.25em;
+    color: var(--ink-faint); text-transform: uppercase;
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+  }
+  .scroll-hint::after {
+    content: ''; width: 1px; height: 42px;
+    background: linear-gradient(var(--ink-faint), transparent);
+    animation: drop 2s ease infinite;
+  }
+  @keyframes drop { 0% { transform: scaleY(0); transform-origin: top; } 60% { transform: scaleY(1); } 100% { opacity: 0; } }
+
+  /* ============ SECCIONES ============ */
+  section { padding: 110px 0; position: relative; }
+  .section-mark {
+    position: absolute; top: 60px; right: 4%;
+    font-family: 'Noto Serif SC', serif; font-size: clamp(8rem, 18vw, 15rem);
+    color: var(--ink); opacity: 0.045; line-height: 1; user-select: none;
+    pointer-events: none; font-weight: 700;
+  }
+  .section-head { margin-bottom: 60px; max-width: 640px; }
+  .section-label {
+    font-family: var(--mono); font-size: 0.75rem; color: var(--jade);
+    letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 14px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-label .zi {
+    font-family: 'Noto Serif SC', serif; font-size: 1.25rem; color: var(--vermillion);
+    letter-spacing: 0; border: 1px solid color-mix(in srgb, var(--vermillion) 40%, transparent);
+    border-radius: 4px; width: 34px; height: 34px; display: grid; place-items: center;
+  }
+  .section-head h2 { font-size: clamp(2rem, 4.6vw, 3rem); font-weight: 500; margin-bottom: 14px; }
+  .section-head p { color: var(--ink-soft); font-size: 1rem; }
+
+  /* reveal on scroll */
+  .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.2, 0.6, 0.2, 1); }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ============ EL CAMINO (sobre mí) ============ */
+  .path-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 60px; align-items: start; }
+  .path-bio p { margin-bottom: 20px; color: var(--ink-soft); font-size: 1.02rem; }
+  .path-bio p:first-child { font-size: 1.18rem; color: var(--ink); font-family: var(--serif); font-style: italic; }
+
+  .pillars { display: flex; flex-direction: column; gap: 14px; }
+  .pillar {
+    border: 1px solid var(--card-border); background: var(--card);
+    border-radius: 4px; padding: 22px 24px; display: flex; gap: 18px;
+    transition: all 0.4s ease; backdrop-filter: blur(6px);
+  }
+  .pillar:hover { transform: translateX(6px); border-color: color-mix(in srgb, var(--vermillion) 35%, transparent); }
+  .pillar .zi {
+    font-family: 'Noto Serif SC', serif; font-size: 1.9rem; color: var(--vermillion);
+    line-height: 1; flex-shrink: 0; margin-top: 4px;
+  }
+  .pillar h3 { font-size: 1.05rem; margin-bottom: 4px; font-weight: 600; font-family: var(--sans); }
+  .pillar p { font-size: 0.88rem; color: var(--ink-soft); }
+
+  .path-photo {
+    margin: 0 0 22px; background: #fff; padding: 10px 10px 14px;
+    border: 1px solid var(--card-border); border-radius: 3px;
+    box-shadow: var(--shadow); transform: rotate(-1.6deg);
+    transition: transform 0.5s ease;
+  }
+  [data-theme="dark"] .path-photo { background: var(--paper-2); }
+  .path-photo:hover { transform: rotate(0deg) scale(1.01); }
+  .path-photo img { width: 100%; display: block; border-radius: 2px; filter: saturate(0.94); }
+  .path-photo figcaption {
+    font-family: var(--mono); font-size: 0.68rem; color: var(--ink-faint);
+    letter-spacing: 0.12em; margin-top: 11px; text-align: center;
+  }
+
+  .zen-quote {
+    margin-top: 70px; text-align: center; position: relative; padding: 40px 20px;
+  }
+  .zen-quote::before, .zen-quote::after {
+    content: ''; position: absolute; left: 50%; transform: translateX(-50%);
+    width: 60px; height: 1px; background: var(--line);
+  }
+  .zen-quote::before { top: 0; }
+  .zen-quote::after { bottom: 0; }
+  .zen-quote blockquote {
+    font-family: var(--serif); font-size: clamp(1.3rem, 3vw, 1.8rem);
+    font-style: italic; font-weight: 400; max-width: 600px; margin: 0 auto 12px;
+  }
+  .zen-quote cite { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-faint); letter-spacing: 0.18em; font-style: normal; }
+
+  /* ============ TIMELINE (academia) ============ */
+  .timeline { position: relative; padding-left: 36px; max-width: 760px; }
+  .timeline::before {
+    content: ''; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 1px;
+    background: linear-gradient(var(--vermillion), var(--line) 30%, var(--line) 85%, transparent);
+  }
+  .t-item { position: relative; padding-bottom: 44px; }
+  .t-item:last-child { padding-bottom: 0; }
+  .t-item::before {
+    content: ''; position: absolute; left: -33px; top: 8px;
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--paper); border: 2px solid var(--jade);
+    transition: all 0.3s ease;
+  }
+  .t-item:hover::before { background: var(--vermillion); border-color: var(--vermillion); transform: scale(1.3); }
+  .t-date { font-family: var(--mono); font-size: 0.72rem; color: var(--jade); letter-spacing: 0.1em; margin-bottom: 6px; }
+  .t-item h3 { font-size: 1.18rem; font-weight: 600; margin-bottom: 3px; }
+  .t-org { font-size: 0.86rem; color: var(--vermillion); font-weight: 500; margin-bottom: 8px; }
+  .t-item p { font-size: 0.92rem; color: var(--ink-soft); max-width: 620px; }
+
+  .edu-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-top: 56px; }
+  .edu-card {
+    border: 1px solid var(--card-border); background: var(--card); border-radius: 4px;
+    padding: 22px; backdrop-filter: blur(6px); transition: all 0.4s ease;
+  }
+  .edu-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+  .edu-card .t-date { margin-bottom: 8px; }
+  .edu-card h3 { font-size: 0.98rem; font-family: var(--sans); font-weight: 600; margin-bottom: 4px; }
+  .edu-card p { font-size: 0.8rem; color: var(--ink-faint); }
+
+  /* ============ INNOVACIÓN ============ */
+  .innov-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 18px; }
+  .innov-card {
+    border: 1px solid var(--card-border); background: var(--card); border-radius: 4px;
+    padding: 30px 28px; position: relative; overflow: hidden;
+    backdrop-filter: blur(6px); transition: all 0.45s ease;
+  }
+  .innov-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--vermillion), var(--jade));
+    transform: scaleX(0); transform-origin: left; transition: transform 0.5s ease;
+  }
+  .innov-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+  .innov-card:hover::before { transform: scaleX(1); }
+  .innov-icon { font-family: var(--mono); font-size: 0.7rem; color: var(--jade); letter-spacing: 0.15em; margin-bottom: 16px; display: block; }
+  .innov-card h3 { font-size: 1.15rem; font-weight: 600; margin-bottom: 10px; font-family: var(--sans); }
+  .innov-card p { font-size: 0.9rem; color: var(--ink-soft); }
+  .innov-card .tag {
+    display: inline-block; margin-top: 16px; font-family: var(--mono); font-size: 0.66rem;
+    color: var(--vermillion); border: 1px solid color-mix(in srgb, var(--vermillion) 35%, transparent);
+    border-radius: 999px; padding: 3px 12px; letter-spacing: 0.08em;
+  }
+  .innov-card.collab {
+    grid-column: 1 / -1; text-align: center; padding: 48px 28px;
+    border-color: color-mix(in srgb, var(--vermillion) 35%, transparent);
+  }
+  .innov-card.collab h3 { font-family: var(--serif); font-size: 1.7rem; font-weight: 500; }
+  .innov-card.collab p { max-width: 540px; margin: 10px auto 26px; }
+
+  .awards { margin-top: 64px; max-width: 760px; }
+  .awards h3 {
+    font-family: var(--mono); font-size: 0.72rem; font-weight: 400;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint);
+    margin-bottom: 18px;
+  }
+  .awards ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+  .awards li { font-size: 0.92rem; color: var(--ink-soft); padding-left: 22px; position: relative; }
+  .awards li::before {
+    content: '◆'; position: absolute; left: 0; top: 0.42em;
+    color: var(--vermillion); font-size: 0.58rem;
+  }
+
+  /* ============ FACILITACIÓN ============ */
+  .teach-list { display: flex; flex-direction: column; max-width: 820px; }
+  .teach-item {
+    display: grid; grid-template-columns: 90px 1fr; gap: 28px; align-items: baseline;
+    padding: 26px 8px; border-bottom: 1px solid var(--line);
+    transition: all 0.35s ease;
+  }
+  .teach-item:first-child { border-top: 1px solid var(--line); }
+  .teach-item:hover { background: var(--card); padding-left: 18px; }
+  .teach-num { font-family: var(--mono); font-size: 0.75rem; color: var(--ink-faint); letter-spacing: 0.1em; }
+  .teach-item h3 { font-size: 1.1rem; font-weight: 600; font-family: var(--sans); margin-bottom: 4px; }
+  .teach-item p { font-size: 0.9rem; color: var(--ink-soft); }
+
+  /* ============ IDIOMAS ============ */
+  .langs { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; max-width: 860px; }
+  .lang-card {
+    text-align: center; border: 1px solid var(--card-border); background: var(--card);
+    border-radius: 4px; padding: 38px 24px; backdrop-filter: blur(6px);
+    transition: all 0.4s ease;
+  }
+  .lang-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+  .lang-glyph { font-family: var(--serif); font-size: 2.6rem; line-height: 1; margin-bottom: 14px; color: var(--vermillion); }
+  .lang-card h3 { font-size: 1.05rem; font-family: var(--sans); font-weight: 600; margin-bottom: 4px; }
+  .lang-card .level { font-family: var(--mono); font-size: 0.72rem; color: var(--jade); letter-spacing: 0.1em; }
+  .lang-dots { display: flex; justify-content: center; gap: 6px; margin-top: 16px; }
+  .lang-dots i { width: 7px; height: 7px; border-radius: 50%; background: var(--line); }
+  .lang-dots i.on { background: var(--jade); }
+
+  /* ============ CONTACTO ============ */
+  .contact { text-align: center; }
+  .contact-enso { width: 90px; height: 90px; margin: 0 auto 30px; }
+  .contact-enso path {
+    fill: none; stroke: var(--vermillion); stroke-width: 5; stroke-linecap: round;
+    stroke-dasharray: 1700; stroke-dashoffset: 1700;
+  }
+  .contact.visible .contact-enso path { animation: drawEnso 2.6s cubic-bezier(0.6, 0, 0.3, 1) forwards; }
+  .contact h2 { font-size: clamp(2rem, 4.6vw, 3rem); font-weight: 500; margin-bottom: 14px; }
+  .contact > .wrap > p { color: var(--ink-soft); max-width: 480px; margin: 0 auto 44px; }
+  .contact-links { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+  .contact-link {
+    display: flex; align-items: center; gap: 10px; text-decoration: none;
+    border: 1px solid var(--line); border-radius: 2px; padding: 14px 26px;
+    font-size: 0.88rem; color: var(--ink-soft); transition: all 0.35s ease;
+    font-family: var(--mono); font-size: 0.8rem;
+  }
+  .contact-link:hover { border-color: var(--vermillion); color: var(--vermillion); transform: translateY(-3px); }
+  .contact-loc { margin-top: 40px; font-family: var(--mono); font-size: 0.72rem; color: var(--ink-faint); letter-spacing: 0.2em; }
+
+  footer {
+    border-top: 1px solid var(--line); padding: 34px 0; text-align: center;
+    font-family: var(--mono); font-size: 0.7rem; color: var(--ink-faint); letter-spacing: 0.08em;
+  }
+  footer .zi { font-family: 'Noto Serif SC', serif; color: var(--vermillion); }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 480px) {
+    .header-inner { padding: 12px 14px; gap: 8px; }
+    .logo-name { display: none; }
+    .lang-switch button { padding: 6px 9px; }
+    .wrap { padding: 0 20px; }
+  }
+  @media (max-width: 880px) {
+    nav { display: none; }
+    .path-grid { grid-template-columns: 1fr; gap: 40px; }
+    .hero-kanji { display: none; }
+    .hero-enso { right: -40%; opacity: 0.6; }
+    .teach-item { grid-template-columns: 1fr; gap: 6px; }
+    section { padding: 80px 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header>
+  <div class="header-inner">
+    <a class="logo" href="#top" aria-label="Inicio">
+      <svg class="logo-enso" viewBox="0 0 100 100"><circle cx="50" cy="50" r="42"/></svg>
+      <span class="logo-name">Diego <span>Urzúa</span></span>
+    </a>
+    <nav>
+      <a href="#camino"><span class="zi">道</span><span data-i18n="nav.path">El camino</span></a>
+      <a href="#academia"><span class="zi">学</span><span data-i18n="nav.academia">Academia</span></a>
+      <a href="#innovacion"><span class="zi">新</span><span data-i18n="nav.innovation">Proyectos</span></a>
+      <a href="#facilitacion"><span class="zi">教</span><span data-i18n="nav.teaching">Facilitación</span></a>
+      <a href="#contacto"><span class="zi">信</span><span data-i18n="nav.contact">Contacto</span></a>
+    </nav>
+    <div class="controls">
+      <div class="lang-switch" role="group" aria-label="Idioma">
+        <button data-lang="es" class="active">ES</button>
+        <button data-lang="en">EN</button>
+        <button data-lang="zh">中文</button>
+      </div>
+      <button class="theme-btn" id="themeBtn" aria-label="Cambiar tema">◐</button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <svg class="hero-enso" viewBox="0 0 600 600" aria-hidden="true">
+    <path class="enso" d="M 380 95 A 230 230 0 1 0 520 290 A 215 215 0 0 0 420 110"/>
+    <image class="portrait-img" href="retrato.png" x="120" y="100" width="370" height="427"/>
+  </svg>
+  <div class="hero-kanji" aria-hidden="true">心 · <b>道</b> · 技 · 学</div>
+
+  <div class="wrap hero-content">
+    <div class="hero-pre"><span data-i18n="hero.pre">~/mente × tecnología × aprendizaje</span><span class="cursor"></span></div>
+    <h1>Diego Urzúa <em>Escobar</em></h1>
+    <p class="hero-role" data-i18n="hero.role">Psicólogo educacional · Investigador · Facilitador</p>
+    <p class="hero-tagline" data-i18n="hero.tagline">Atención plena, tecnología y rigor académico: investigo, enseño y creo herramientas para que las personas aprendan mejor.</p>
+    <div class="hero-cta">
+      <a href="#contacto" class="btn btn-primary" data-i18n="hero.cta1">Conversemos</a>
+      <a href="#camino" class="btn btn-ghost" data-i18n="hero.cta2">Conoce mi camino</a>
+    </div>
+    <div class="seal" title="迪 · Dí (Diego)">迪</div>
+  </div>
+  <div class="scroll-hint"><span data-i18n="hero.scroll">desplázate</span></div>
+</section>
+
+<!-- ============ 道 EL CAMINO ============ -->
+<section id="camino">
+  <div class="section-mark" aria-hidden="true">道</div>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-label"><span class="zi">道</span><span data-i18n="path.label">El camino</span></div>
+      <h2 data-i18n="path.title">Mente de principiante, herramientas de futuro</h2>
+      <p data-i18n="path.sub">Tres tradiciones conviven en mi trabajo: la quietud, el laboratorio y el código.</p>
+    </div>
+    <div class="path-grid">
+      <div class="path-bio reveal">
+        <p data-i18n="path.bio1">Soy psicólogo educacional de la Pontificia Universidad Católica de Chile. Mi trabajo habita la intersección entre la mente humana, el aprendizaje y la tecnología.</p>
+        <p data-i18n="path.bio2">Investigo cómo la inteligencia artificial, ejecutada de forma local y ética, puede evaluar y potenciar el aprendizaje en la infancia. A la vez, facilito espacios de formación para públicos muy distintos: desde trabajadores en faenas mineras hasta emprendedores y personas mayores.</p>
+        <p data-i18n="path.bio3">Practico la atención plena como brújula de trabajo: claridad antes que ruido, profundidad antes que prisa, y una mente de principiante como punto de partida de toda investigación.</p>
+      </div>
+      <div class="pillars">
+        <figure class="path-photo reveal">
+          <img src="foto-tsinghua.jpg" alt="Diego Urzúa frente a la puerta de la Universidad Tsinghua, Beijing">
+          <figcaption data-i18n="photo.caption">清华园 · Tsinghua, Beijing</figcaption>
+        </figure>
+        <div class="pillar reveal">
+          <span class="zi">静</span>
+          <div>
+            <h3 data-i18n="pillar1.title">Quietud</h3>
+            <p data-i18n="pillar1.text">Presencia y escucha. Diseñar con calma, observar sin juicio, simplificar lo complejo.</p>
+          </div>
+        </div>
+        <div class="pillar reveal">
+          <span class="zi">技</span>
+          <div>
+            <h3 data-i18n="pillar2.title">Tecnología</h3>
+            <p data-i18n="pillar2.text">IA local, análisis de datos en R y SPSS, y herramientas digitales al servicio del aprendizaje.</p>
+          </div>
+        </div>
+        <div class="pillar reveal">
+          <span class="zi">学</span>
+          <div>
+            <h3 data-i18n="pillar3.title">Academia</h3>
+            <p data-i18n="pillar3.text">Rigor metodológico, ética en investigación y ciencia abierta como brújula del conocimiento.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="zen-quote reveal">
+      <blockquote data-i18n="quote.text">«No puedes detener las olas, pero puedes aprender a surfear.»</blockquote>
+      <cite data-i18n="quote.author">Jon Kabat-Zinn</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 学 ACADEMIA ============ -->
+<section id="academia">
+  <div class="section-mark" aria-hidden="true">学</div>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-label"><span class="zi">学</span><span data-i18n="acad.label">Academia e investigación</span></div>
+      <h2 data-i18n="acad.title">Investigar es una práctica de atención</h2>
+      <p data-i18n="acad.sub">Investigación en psicología educacional, lenguaje e infancia, con datos cuantitativos y cualitativos.</p>
+    </div>
+
+    <div class="timeline">
+      <div class="t-item reveal">
+        <div class="t-date">2025 / 2026</div>
+        <h3 data-i18n="r1.title">Tesista e Investigador · FONDECYT N°1251102</h3>
+        <div class="t-org" data-i18n="r1.org">Facultad de Educación, Pontificia Universidad Católica de Chile</div>
+        <p data-i18n="r1.desc">Diseño e implementación de una metodología de evaluación educativa basada en IA local; procesamiento y análisis de datos de evaluación en infancia, bajo protocolos de ética y resguardo de datos. Supervisora: Prof. Katherine Strasser.</p>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-date">2025</div>
+        <h3 data-i18n="r2.title">Pasante de Investigación · FONDECYT N°1231550</h3>
+        <div class="t-org" data-i18n="r2.org">Facultad de Educación, UC · Dra. Susana Mendive</div>
+        <p data-i18n="r2.desc">Recolección y análisis de datos sobre el desarrollo del discurso narrativo en preescolares; sistematización de información y documentación de hallazgos.</p>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-date">2022 / 2024</div>
+        <h3 data-i18n="r3.title">Asistente de Investigación · LIFLab</h3>
+        <div class="t-org" data-i18n="r3.org">Lab. de Lenguaje, Interacción y Fenomenología, UC</div>
+        <p data-i18n="r3.desc">Recolección de datos en laboratorio, análisis cuantitativo y manejo de equipo técnico de registro en los proyectos FONDECYT N°1221096 y N°1181271.</p>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-date">2023 / 2024</div>
+        <h3 data-i18n="r4.title">Pasante de Investigación · Parenting Stress Project</h3>
+        <div class="t-org" data-i18n="r4.org">Universidad Austral, Argentina</div>
+        <p data-i18n="r4.desc">Desarrollo y adaptación de un instrumento psicométrico; revisión de literatura y análisis de datos.</p>
+      </div>
+    </div>
+
+    <div class="edu-cards">
+      <div class="edu-card reveal">
+        <div class="t-date">2026</div>
+        <h3 data-i18n="e1.title">Magíster en Psicología Educacional</h3>
+        <p data-i18n="e1.org">Pontificia Universidad Católica de Chile</p>
+      </div>
+      <div class="edu-card reveal">
+        <div class="t-date">2025</div>
+        <h3 data-i18n="e2.title">Psicólogo, mención Psicología Educacional</h3>
+        <p data-i18n="e2.org">Pontificia Universidad Católica de Chile</p>
+      </div>
+      <div class="edu-card reveal">
+        <div class="t-date">2024</div>
+        <h3 data-i18n="e3.title">Licenciatura en Psicología</h3>
+        <p data-i18n="e3.org">Pontificia Universidad Católica de Chile</p>
+      </div>
+      <div class="edu-card reveal">
+        <div class="t-date">2023</div>
+        <h3 data-i18n="e4.title">Licenciatura en Ciencias Sociales</h3>
+        <p data-i18n="e4.org">Pontificia Universidad Católica de Chile</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 新 INNOVACIÓN ============ -->
+<section id="innovacion">
+  <div class="section-mark" aria-hidden="true">新</div>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-label"><span class="zi">新</span><span data-i18n="innov.label">Proyectos y colaboración</span></div>
+      <h2 data-i18n="innov.title">Lo que estoy creando ahora</h2>
+      <p data-i18n="innov.sub">Tres proyectos en curso y una puerta abierta a crear juntos.</p>
+    </div>
+    <div class="innov-grid">
+      <div class="innov-card reveal">
+        <span class="innov-icon">[ aprendelocal ]</span>
+        <h3 data-i18n="p1.title">AprendeLocal</h3>
+        <p data-i18n="p1.desc">Tecnología educativa con raíz territorial: un sistema con machine learning que genera proyectos STEM situados en zonas rurales, a partir del ecosistema, el patrimonio histórico y natural, y los desafíos de cada lugar.</p>
+        <span class="tag" data-i18n="p1.tag">en desarrollo</span>
+      </div>
+      <div class="innov-card reveal">
+        <span class="innov-icon">[ tesis ]</span>
+        <h3 data-i18n="p2.title">Evaluación automática del aprendizaje</h3>
+        <p data-i18n="p2.desc">Mi tesis de magíster: evaluación automatizada de vocabulario expresivo en escolares mediante modelos de lenguaje, comparada con jueces humanos y validada con medidas estandarizadas (FONDECYT N°1251102).</p>
+        <span class="tag" data-i18n="p2.tag">tesis · defensa 2026</span>
+      </div>
+      <div class="innov-card reveal">
+        <span class="innov-icon">[ meta ]</span>
+        <h3 data-i18n="p3.title">Meta-análisis</h3>
+        <p data-i18n="p3.desc">Revisión sistemática y meta-análisis en psicología educacional: cribado de más de 500 estudios con metodología PRISMA para sintetizar la evidencia disponible.</p>
+        <span class="tag" data-i18n="p3.tag">investigación en curso</span>
+      </div>
+      <div class="innov-card collab reveal">
+        <h3 data-i18n="collab.title">¿Creamos algo juntos?</h3>
+        <p data-i18n="collab.desc">Estos proyectos están vivos y abiertos. Si investigas, enseñas o construyes en educación, IA o aprendizaje, me encantaría conversar y explorar colaboraciones.</p>
+        <a href="#contacto" class="btn btn-primary" data-i18n="collab.cta">Escríbeme</a>
+      </div>
+    </div>
+    <div class="awards reveal">
+      <h3 data-i18n="awards.title">Reconocimientos</h3>
+      <ul>
+        <li data-i18n="aw1">1er lugar · Concurso Internacional de Innovación UC, Tec de Monterrey y Uniandes (2022)</li>
+        <li data-i18n="aw2">Finalista · Concurso de innovación, Tsinghua University</li>
+        <li data-i18n="aw3">Huawei Seeds for the Future (2023/24)</li>
+        <li data-i18n="aw4">Certificación Microsoft Azure AI Fundamentals (2025)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 教 FACILITACIÓN ============ -->
+<section id="facilitacion">
+  <div class="section-mark" aria-hidden="true">教</div>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-label"><span class="zi">教</span><span data-i18n="teach.label">Facilitación y enseñanza</span></div>
+      <h2 data-i18n="teach.title">Enseñar es estar presente</h2>
+      <p data-i18n="teach.sub">He facilitado aprendizaje en contextos radicalmente distintos. La práctica es la misma: presencia, claridad y respeto por quien aprende.</p>
+    </div>
+    <div class="teach-list">
+      <div class="teach-item reveal">
+        <span class="teach-num">01 · 2025</span>
+        <div>
+          <h3 data-i18n="t1.title">Capacitación en faenas mineras</h3>
+          <p data-i18n="t1.desc">Relator freelance de capacitaciones presenciales sobre aversión al riesgo, con grupos de 10 a 30 trabajadores operativos en contexto laboral exigente.</p>
+        </div>
+      </div>
+      <div class="teach-item reveal">
+        <span class="teach-num">02 · 2025/26</span>
+        <div>
+          <h3 data-i18n="t2.title">Workshops para emprendedores</h3>
+          <p data-i18n="t2.desc">Coordinación de formación y aprendizaje para una comunidad de emprendedores: talleres en vivo, asesorías y diseño del programa formativo completo.</p>
+        </div>
+      </div>
+      <div class="teach-item reveal">
+        <span class="teach-num">03 · 2024/25</span>
+        <div>
+          <h3 data-i18n="t3.title">Diseño instruccional y formación docente</h3>
+          <p data-i18n="t3.desc">Diseño de un sistema de formación en Aprendizaje Basado en Proyectos (ABP) para el desarrollo profesional de docentes.</p>
+        </div>
+      </div>
+      <div class="teach-item reveal">
+        <span class="teach-num">04 · 2023/25</span>
+        <div>
+          <h3 data-i18n="t4.title">Docencia universitaria</h3>
+          <p data-i18n="t4.desc">Ayudante en la UC en cursos de Desarrollo del Lenguaje, Cognición y Psicología: sesiones, material de apoyo y evaluación de aprendizajes.</p>
+        </div>
+      </div>
+      <div class="teach-item reveal">
+        <span class="teach-num">05 · 2023/24</span>
+        <div>
+          <h3 data-i18n="t5.title">Comunidad y territorio</h3>
+          <p data-i18n="t5.desc">Talleres de habilidades digitales para personas mayores, talleres educativos con niñez y adolescencia en Perú, y programas de reforzamiento educativo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 语 IDIOMAS ============ -->
+<section id="idiomas">
+  <div class="section-mark" aria-hidden="true">语</div>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-label"><span class="zi">语</span><span data-i18n="langs.label">Idiomas</span></div>
+      <h2 data-i18n="langs.title">Tres lenguas, un mismo asombro</h2>
+      <p data-i18n="langs.sub">Esta página existe en los tres idiomas en los que pienso, estudio y sueño.</p>
+    </div>
+    <div class="langs">
+      <div class="lang-card reveal">
+        <div class="lang-glyph">Ñ</div>
+        <h3 data-i18n="l1.name">Español</h3>
+        <div class="level" data-i18n="l1.level">nativo</div>
+        <div class="lang-dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+      </div>
+      <div class="lang-card reveal">
+        <div class="lang-glyph">A</div>
+        <h3 data-i18n="l2.name">Inglés</h3>
+        <div class="level">B2 · IELTS 6.0 (2025)</div>
+        <div class="lang-dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
+      </div>
+      <div class="lang-card reveal">
+        <div class="lang-glyph">中</div>
+        <h3 data-i18n="l3.name">Chino mandarín</h3>
+        <div class="level">A2 · HSK 2 (2024)</div>
+        <div class="lang-dots"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 信 CONTACTO ============ -->
+<section id="contacto" class="contact reveal">
+  <div class="wrap">
+    <svg class="contact-enso" viewBox="0 0 600 600" aria-hidden="true">
+      <path d="M 380 95 A 230 230 0 1 0 520 290 A 215 215 0 0 0 420 110"/>
+    </svg>
+    <h2 data-i18n="contact.title">El siguiente paso del camino</h2>
+    <p data-i18n="contact.sub">Si quieres investigar, crear o aprender juntos, o simplemente conversar sobre mentes, máquinas y aprendizaje, escríbeme.</p>
+    <div class="contact-links">
+      <a class="contact-link" href="mailto:durzs@uc.cl">✉ durzs@uc.cl</a>
+      <a class="contact-link" href="https://linkedin.com/in/durzs" target="_blank" rel="noopener">in/ linkedin.com/in/durzs</a>
+      <a class="contact-link" href="tel:+56956881664">☏ +56 9 5688 1664</a>
+    </div>
+    <div class="contact-loc" data-i18n="contact.loc">SANTIAGO · CHILE · 智利圣地亚哥</div>
+  </div>
+</section>
+
+<footer>
+  <span data-i18n="footer.text">Hecho con calma</span> · <span class="zi">道 学 新</span> · Diego Urzúa Escobar · 2026
+</footer>
+
+<script>
+/* ============ i18n ============ */
+const I18N = {
+  es: {
+    'nav.path': 'El camino', 'nav.academia': 'Academia', 'nav.innovation': 'Proyectos',
+    'nav.teaching': 'Facilitación', 'nav.contact': 'Contacto',
+    'hero.pre': '~/mente × tecnología × aprendizaje',
+    'hero.role': 'Psicólogo educacional · Investigador · Facilitador',
+    'hero.tagline': 'Atención plena, tecnología y rigor académico: investigo, enseño y creo herramientas para que las personas aprendan mejor.',
+    'hero.cta1': 'Conversemos', 'hero.cta2': 'Conoce mi camino', 'hero.scroll': 'desplázate',
+    'path.label': 'El camino', 'path.title': 'Mente de principiante, herramientas de futuro',
+    'path.sub': 'Tres tradiciones conviven en mi trabajo: la quietud, el laboratorio y el código.',
+    'path.bio1': 'Soy psicólogo educacional de la Pontificia Universidad Católica de Chile. Mi trabajo habita la intersección entre la mente humana, el aprendizaje y la tecnología.',
+    'path.bio2': 'Investigo cómo la inteligencia artificial, ejecutada de forma local y ética, puede evaluar y potenciar el aprendizaje en la infancia. A la vez, facilito espacios de formación para públicos muy distintos: desde trabajadores en faenas mineras hasta emprendedores y personas mayores.',
+    'path.bio3': 'Practico la atención plena como brújula de trabajo: claridad antes que ruido, profundidad antes que prisa, y una mente de principiante como punto de partida de toda investigación.',
+    'photo.caption': '清华园 · Tsinghua, Beijing',
+    'pillar1.title': 'Quietud', 'pillar1.text': 'Presencia y escucha. Diseñar con calma, observar sin juicio, simplificar lo complejo.',
+    'pillar2.title': 'Tecnología', 'pillar2.text': 'IA local, análisis de datos en R y SPSS, y herramientas digitales al servicio del aprendizaje.',
+    'pillar3.title': 'Academia', 'pillar3.text': 'Rigor metodológico, ética en investigación y ciencia abierta como brújula del conocimiento.',
+    'quote.text': '«No puedes detener las olas, pero puedes aprender a surfear.»',
+    'quote.author': 'Jon Kabat-Zinn',
+    'acad.label': 'Academia e investigación', 'acad.title': 'Investigar es una práctica de atención',
+    'acad.sub': 'Investigación en psicología educacional, lenguaje e infancia, con datos cuantitativos y cualitativos.',
+    'r1.title': 'Tesista e Investigador · FONDECYT N°1251102',
+    'r1.org': 'Facultad de Educación, Pontificia Universidad Católica de Chile',
+    'r1.desc': 'Diseño e implementación de una metodología de evaluación educativa basada en IA local; procesamiento y análisis de datos de evaluación en infancia, bajo protocolos de ética y resguardo de datos. Supervisora: Prof. Katherine Strasser.',
+    'r2.title': 'Pasante de Investigación · FONDECYT N°1231550',
+    'r2.org': 'Facultad de Educación, UC · Dra. Susana Mendive',
+    'r2.desc': 'Recolección y análisis de datos sobre el desarrollo del discurso narrativo en preescolares; sistematización de información y documentación de hallazgos.',
+    'r3.title': 'Asistente de Investigación · LIFLab',
+    'r3.org': 'Lab. de Lenguaje, Interacción y Fenomenología, UC',
+    'r3.desc': 'Recolección de datos en laboratorio, análisis cuantitativo y manejo de equipo técnico de registro en los proyectos FONDECYT N°1221096 y N°1181271.',
+    'r4.title': 'Pasante de Investigación · Parenting Stress Project',
+    'r4.org': 'Universidad Austral, Argentina',
+    'r4.desc': 'Desarrollo y adaptación de un instrumento psicométrico; revisión de literatura y análisis de datos.',
+    'e1.title': 'Magíster en Psicología Educacional', 'e1.org': 'Pontificia Universidad Católica de Chile',
+    'e2.title': 'Psicólogo, mención Psicología Educacional', 'e2.org': 'Pontificia Universidad Católica de Chile',
+    'e3.title': 'Licenciatura en Psicología', 'e3.org': 'Pontificia Universidad Católica de Chile',
+    'e4.title': 'Licenciatura en Ciencias Sociales', 'e4.org': 'Pontificia Universidad Católica de Chile',
+    'innov.label': 'Proyectos y colaboración', 'innov.title': 'Lo que estoy creando ahora',
+    'innov.sub': 'Tres proyectos en curso y una puerta abierta a crear juntos.',
+    'p1.title': 'AprendeLocal',
+    'p1.desc': 'Tecnología educativa con raíz territorial: un sistema con machine learning que genera proyectos STEM situados en zonas rurales, a partir del ecosistema, el patrimonio histórico y natural, y los desafíos de cada lugar.',
+    'p1.tag': 'en desarrollo',
+    'p2.title': 'Evaluación automática del aprendizaje',
+    'p2.desc': 'Mi tesis de magíster: evaluación automatizada de vocabulario expresivo en escolares mediante modelos de lenguaje, comparada con jueces humanos y validada con medidas estandarizadas (FONDECYT N°1251102).',
+    'p2.tag': 'tesis · defensa 2026',
+    'p3.title': 'Meta-análisis',
+    'p3.desc': 'Revisión sistemática y meta-análisis en psicología educacional: cribado de más de 500 estudios con metodología PRISMA para sintetizar la evidencia disponible.',
+    'p3.tag': 'investigación en curso',
+    'collab.title': '¿Creamos algo juntos?',
+    'collab.desc': 'Estos proyectos están vivos y abiertos. Si investigas, enseñas o construyes en educación, IA o aprendizaje, me encantaría conversar y explorar colaboraciones.',
+    'collab.cta': 'Escríbeme',
+    'awards.title': 'Reconocimientos',
+    'aw1': '1er lugar · Concurso Internacional de Innovación UC, Tec de Monterrey y Uniandes (2022)',
+    'aw2': 'Finalista · Concurso de innovación, Tsinghua University',
+    'aw3': 'Huawei Seeds for the Future (2023/24)',
+    'aw4': 'Certificación Microsoft Azure AI Fundamentals (2025)',
+    'teach.label': 'Facilitación y enseñanza', 'teach.title': 'Enseñar es estar presente',
+    'teach.sub': 'He facilitado aprendizaje en contextos radicalmente distintos. La práctica es la misma: presencia, claridad y respeto por quien aprende.',
+    't1.title': 'Capacitación en faenas mineras',
+    't1.desc': 'Relator freelance de capacitaciones presenciales sobre aversión al riesgo, con grupos de 10 a 30 trabajadores operativos en contexto laboral exigente.',
+    't2.title': 'Workshops para emprendedores',
+    't2.desc': 'Coordinación de formación y aprendizaje para una comunidad de emprendedores: talleres en vivo, asesorías y diseño del programa formativo completo.',
+    't3.title': 'Diseño instruccional y formación docente',
+    't3.desc': 'Diseño de un sistema de formación en Aprendizaje Basado en Proyectos (ABP) para el desarrollo profesional de docentes.',
+    't4.title': 'Docencia universitaria',
+    't4.desc': 'Ayudante en la UC en cursos de Desarrollo del Lenguaje, Cognición y Psicología: sesiones, material de apoyo y evaluación de aprendizajes.',
+    't5.title': 'Comunidad y territorio',
+    't5.desc': 'Talleres de habilidades digitales para personas mayores, talleres educativos con niñez y adolescencia en Perú, y programas de reforzamiento educativo.',
+    'langs.label': 'Idiomas', 'langs.title': 'Tres lenguas, un mismo asombro',
+    'langs.sub': 'Esta página existe en los tres idiomas en los que pienso, estudio y sueño.',
+    'l1.name': 'Español', 'l1.level': 'nativo', 'l2.name': 'Inglés', 'l3.name': 'Chino mandarín',
+    'contact.title': 'El siguiente paso del camino',
+    'contact.sub': 'Si quieres investigar, crear o aprender juntos, o simplemente conversar sobre mentes, máquinas y aprendizaje, escríbeme.',
+    'contact.loc': 'SANTIAGO · CHILE · 智利圣地亚哥',
+    'footer.text': 'Hecho con calma'
+  },
+  en: {
+    'nav.path': 'The Path', 'nav.academia': 'Academia', 'nav.innovation': 'Projects',
+    'nav.teaching': 'Facilitation', 'nav.contact': 'Contact',
+    'hero.pre': '~/mind × technology × learning',
+    'hero.role': 'Educational Psychologist · Researcher · Facilitator',
+    'hero.tagline': 'Mindful attention, technology and academic rigor: I research, teach and build tools so that people can learn better.',
+    'hero.cta1': "Let's talk", 'hero.cta2': 'Walk my path', 'hero.scroll': 'scroll',
+    'path.label': 'The Path', 'path.title': "Beginner's mind, tools of the future",
+    'path.sub': 'Three traditions coexist in my work: stillness, the laboratory, and code.',
+    'path.bio1': 'I am an educational psychologist from the Pontificia Universidad Católica de Chile. My work lives at the intersection of the human mind, learning, and technology.',
+    'path.bio2': 'I research how artificial intelligence, run locally and ethically,can assess and enhance learning in childhood. At the same time, I facilitate learning spaces for very different audiences: from mining-site workers to entrepreneurs and older adults.',
+    'path.bio3': "I practice mindful attention as a working compass: clarity over noise, depth over haste, and a beginner's mind as the starting point of every inquiry.",
+    'photo.caption': '清华园 · Tsinghua, Beijing',
+    'pillar1.title': 'Stillness', 'pillar1.text': 'Presence and listening. Designing calmly, observing without judgment, simplifying the complex.',
+    'pillar2.title': 'Technology', 'pillar2.text': 'Local AI, data analysis in R and SPSS, and digital tools in the service of learning.',
+    'pillar3.title': 'Academia', 'pillar3.text': 'Methodological rigor, research ethics and open science as a compass for knowledge.',
+    'quote.text': '"You can\'t stop the waves, but you can learn to surf."',
+    'quote.author': 'Jon Kabat-Zinn',
+    'acad.label': 'Academia & Research', 'acad.title': 'Research is a practice of attention',
+    'acad.sub': 'Research in educational psychology, language and childhood, with quantitative and qualitative data.',
+    'r1.title': 'Thesis Researcher · FONDECYT No. 1251102',
+    'r1.org': 'Faculty of Education, Pontificia Universidad Católica de Chile',
+    'r1.desc': 'Design and implementation of an educational assessment methodology based on local AI; processing and analysis of childhood assessment data under research-ethics and data-protection protocols. Supervisor: Prof. Katherine Strasser.',
+    'r2.title': 'Research Intern · FONDECYT No. 1231550',
+    'r2.org': 'Faculty of Education, UC · Dr. Susana Mendive',
+    'r2.desc': 'Collection and analysis of data on narrative discourse development in preschoolers; systematization of information and documentation of findings.',
+    'r3.title': 'Research Assistant · LIFLab',
+    'r3.org': 'Language, Interaction & Phenomenology Lab, UC',
+    'r3.desc': 'Laboratory data collection, quantitative analysis and management of recording equipment in FONDECYT projects No. 1221096 and No. 1181271.',
+    'r4.title': 'Research Intern · Parenting Stress Project',
+    'r4.org': 'Universidad Austral, Argentina',
+    'r4.desc': 'Development and adaptation of a psychometric instrument; literature review and data analysis.',
+    'e1.title': "Master's in Educational Psychology", 'e1.org': 'Pontificia Universidad Católica de Chile',
+    'e2.title': 'Psychologist, Educational Psychology track', 'e2.org': 'Pontificia Universidad Católica de Chile',
+    'e3.title': 'B.A. in Psychology', 'e3.org': 'Pontificia Universidad Católica de Chile',
+    'e4.title': 'B.A. in Social Sciences', 'e4.org': 'Pontificia Universidad Católica de Chile',
+    'innov.label': 'Projects & Collaboration', 'innov.title': 'What I am building now',
+    'innov.sub': 'Three ongoing projects and an open door to build together.',
+    'p1.title': 'AprendeLocal',
+    'p1.desc': 'Edtech rooted in territory: a machine learning system that generates place-based STEM projects for rural areas, drawing on each place\'s ecosystem, natural and historical heritage, and local challenges.',
+    'p1.tag': 'in development',
+    'p2.title': 'Automated learning assessment',
+    'p2.desc': "My master's thesis: automated assessment of schoolchildren's expressive vocabulary using language models, benchmarked against human raters and validated with standardized measures (FONDECYT No. 1251102).",
+    'p2.tag': 'thesis · defense 2026',
+    'p3.title': 'Meta-analysis',
+    'p3.desc': 'Systematic review and meta-analysis in educational psychology: screening of over 500 studies under PRISMA methodology to synthesize the available evidence.',
+    'p3.tag': 'ongoing research',
+    'collab.title': 'Shall we build something together?',
+    'collab.desc': 'These projects are alive and open. If you research, teach or build in education, AI or learning, I would love to talk and explore collaborations.',
+    'collab.cta': 'Write to me',
+    'awards.title': 'Recognition',
+    'aw1': '1st place · UC, Tec de Monterrey & Uniandes International Innovation Challenge (2022)',
+    'aw2': 'Finalist · Innovation challenge, Tsinghua University',
+    'aw3': 'Huawei Seeds for the Future (2023/24)',
+    'aw4': 'Microsoft Azure AI Fundamentals certification (2025)',
+    'teach.label': 'Facilitation & Teaching', 'teach.title': 'Teaching is being present',
+    'teach.sub': 'I have facilitated learning in radically different contexts. The practice is the same: presence, clarity and respect for the learner.',
+    't1.title': 'Training at mining sites',
+    't1.desc': 'Freelance trainer delivering in-person risk-aversion training to groups of 10 to 30 operational workers in demanding work environments.',
+    't2.title': 'Workshops for entrepreneurs',
+    't2.desc': 'Learning and training coordination for a community of entrepreneurs: live workshops, advisory sessions and design of the full learning program.',
+    't3.title': 'Instructional design & teacher development',
+    't3.desc': 'Design of a Project-Based Learning (PBL) training system for teachers’ professional development.',
+    't4.title': 'University teaching',
+    't4.desc': 'Teaching assistant at UC in Language Development, Cognition and Psychology courses: sessions, support materials and learning assessment.',
+    't5.title': 'Community & territory',
+    't5.desc': 'Digital skills workshops for older adults, educational workshops with children and adolescents in Peru, and educational reinforcement programs.',
+    'langs.label': 'Languages', 'langs.title': 'Three languages, one same wonder',
+    'langs.sub': 'This page exists in the three languages I think, study and dream in.',
+    'l1.name': 'Spanish', 'l1.level': 'native', 'l2.name': 'English', 'l3.name': 'Mandarin Chinese',
+    'contact.title': 'The next step on the path',
+    'contact.sub': 'If you want to research, create or learn together, or simply talk about minds, machines and learning, write to me.',
+    'contact.loc': 'SANTIAGO · CHILE · 智利圣地亚哥',
+    'footer.text': 'Made with calm'
+  },
+  zh: {
+    'nav.path': '之路', 'nav.academia': '学术', 'nav.innovation': '项目',
+    'nav.teaching': '教学', 'nav.contact': '联系',
+    'hero.pre': '~/心灵 × 科技 × 学习',
+    'hero.role': '教育心理学家 · 研究者 · 引导师',
+    'hero.tagline': '正念、科技与学术的严谨:我做研究、教学,并创造工具,让人们学得更好。',
+    'hero.cta1': '联系我', 'hero.cta2': '了解我的道路', 'hero.scroll': '下滑',
+    'path.label': '道·之路', 'path.title': '初心,与未来之器',
+    'path.sub': '我的工作融合三种传统:静、实验室与代码。',
+    'path.bio1': '我是智利天主教大学(UC)的教育心理学家。我的工作位于人类心灵、学习与科技的交汇处。',
+    'path.bio2': '我研究本地化、合乎伦理的人工智能如何评估并促进儿童学习;同时,我为截然不同的人群提供培训:从矿区工人到创业者和长者。',
+    'path.bio3': '我以正念专注作为工作的指南针:清明胜于喧嚣,深度胜于仓促,以初学者之心作为一切研究的起点。',
+    'photo.caption': '北京 · 清华园',
+    'pillar1.title': '静', 'pillar1.text': '临在与倾听。从容地设计,不带评判地观察,化繁为简。',
+    'pillar2.title': '技', 'pillar2.text': '本地AI、R与SPSS数据分析,以及服务于学习的数字工具。',
+    'pillar3.title': '学', 'pillar3.text': '方法论的严谨、研究伦理与开放科学,是求知的指南针。',
+    'quote.text': '「你无法阻止海浪,但你可以学会冲浪。」',
+    'quote.author': '乔恩·卡巴金 · Jon Kabat-Zinn',
+    'acad.label': '学术与研究', 'acad.title': '研究,是一种专注的练习',
+    'acad.sub': '教育心理学、语言与儿童发展研究,兼用定量与定性数据。',
+    'r1.title': '硕士研究员 · FONDECYT 1251102号项目',
+    'r1.org': '智利天主教大学教育学院',
+    'r1.desc': '设计并实施基于本地AI的教育评估方法;在研究伦理与数据保护协议下处理和分析儿童评估数据。导师:Katherine Strasser教授。',
+    'r2.title': '研究实习生 · FONDECYT 1231550号项目',
+    'r2.org': '智利天主教大学教育学院 · Susana Mendive博士',
+    'r2.desc': '收集并分析学龄前儿童叙事话语发展的数据;系统整理信息并记录研究发现。',
+    'r3.title': '研究助理 · LIFLab实验室',
+    'r3.org': '智利天主教大学语言、互动与现象学实验室',
+    'r3.desc': '在FONDECYT 1221096号与1181271号项目中负责实验室数据收集、定量分析及录制设备的操作。',
+    'r4.title': '研究实习生 · 育儿压力研究项目',
+    'r4.org': '阿根廷南方大学',
+    'r4.desc': '参与心理测量工具的开发与改编;文献综述与数据分析。',
+    'e1.title': '教育心理学硕士', 'e1.org': '智利天主教大学',
+    'e2.title': '心理学家(教育心理学方向)', 'e2.org': '智利天主教大学',
+    'e3.title': '心理学学士', 'e3.org': '智利天主教大学',
+    'e4.title': '社会科学学士', 'e4.org': '智利天主教大学',
+    'innov.label': '项目与合作', 'innov.title': '我正在创造的',
+    'innov.sub': '三个进行中的项目,以及一扇向合作敞开的门。',
+    'p1.title': 'AprendeLocal',
+    'p1.desc': '扎根于土地的教育科技:一个运用机器学习的系统,依据每个地方的生态、自然与历史遗产及其挑战,为乡村地区生成在地化的STEM项目。',
+    'p1.tag': '开发中',
+    'p2.title': '学习的自动化评估',
+    'p2.desc': '我的硕士论文:利用语言模型对学童表达性词汇进行自动化评估,与人工评分对照,并以标准化测验加以验证(FONDECYT 1251102号项目)。',
+    'p2.tag': '论文 · 2026年答辩',
+    'p3.title': '元分析',
+    'p3.desc': '教育心理学的系统综述与元分析:按照PRISMA方法筛选500余篇研究,以综合现有证据。',
+    'p3.tag': '研究进行中',
+    'collab.title': '一起创造点什么?',
+    'collab.desc': '这些项目正在生长,并向外敞开。如果你在教育、AI或学习领域做研究、教学或开发,我很乐意交流并探索合作。',
+    'collab.cta': '给我写信',
+    'awards.title': '奖项与认可',
+    'aw1': '第一名 · UC、蒙特雷理工与安第斯大学国际创新比赛(2022)',
+    'aw2': '决赛入围 · 清华大学创新比赛',
+    'aw3': '华为「未来种子」计划(2023/24)',
+    'aw4': '微软Azure AI基础认证(2025)',
+    'teach.label': '教学与引导', 'teach.title': '教学,即是临在',
+    'teach.sub': '我曾在截然不同的环境中引导学习,核心始终如一:临在、清晰,以及对学习者的尊重。',
+    't1.title': '矿区培训',
+    't1.desc': '自由职业培训师,为10至30人的一线矿区工人团队开展现场风险防范培训,环境要求严苛。',
+    't2.title': '创业者工作坊',
+    't2.desc': '为创业者社群协调培训与学习:现场工作坊、咨询辅导及整套培训方案的设计。',
+    't3.title': '教学设计与教师发展',
+    't3.desc': '为教师专业发展设计基于项目式学习(PBL)的培训体系。',
+    't4.title': '大学教学',
+    't4.desc': '在智利天主教大学担任语言发展、认知与心理学课程助教:授课、编写辅助材料与学习评估。',
+    't5.title': '社区与田野',
+    't5.desc': '为长者开设数字技能工作坊,在秘鲁与儿童青少年开展教育工作坊,以及教育辅导项目。',
+    'langs.label': '语言', 'langs.title': '三种语言,同一份惊奇',
+    'langs.sub': '这个网页以我用来思考、学习和做梦的三种语言呈现。',
+    'l1.name': '西班牙语', 'l1.level': '母语', 'l2.name': '英语', 'l3.name': '中文(普通话)',
+    'contact.title': '道路的下一步',
+    'contact.sub': '如果你想一起研究、创造或学习,或者只是聊聊心灵、机器与学习,欢迎来信。',
+    'contact.loc': 'SANTIAGO · CHILE · 智利圣地亚哥',
+    'footer.text': '静心而作'
+  }
+};
+
+function setLang(lang) {
+  const dict = I18N[lang] || I18N.es;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (dict[key] !== undefined) el.textContent = dict[key];
+  });
+  document.documentElement.lang = lang === 'zh' ? 'zh-Hans' : lang;
+  document.body.classList.toggle('lang-zh', lang === 'zh');
+  document.querySelectorAll('.lang-switch button').forEach(b =>
+    b.classList.toggle('active', b.dataset.lang === lang));
+  try { localStorage.setItem('lang', lang); } catch (e) {}
+}
+
+document.querySelectorAll('.lang-switch button').forEach(btn =>
+  btn.addEventListener('click', () => setLang(btn.dataset.lang)));
+
+/* ============ tema ============ */
+const themeBtn = document.getElementById('themeBtn');
+function setTheme(t) {
+  document.documentElement.dataset.theme = t;
+  themeBtn.textContent = t === 'dark' ? '◑' : '◐';
+  try { localStorage.setItem('theme', t); } catch (e) {}
+}
+themeBtn.addEventListener('click', () =>
+  setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'));
+
+/* ============ reveal on scroll ============ */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* ============ init ============ */
+let savedLang = null, savedTheme = null;
+try {
+  savedLang = localStorage.getItem('lang');
+  savedTheme = localStorage.getItem('theme');
+} catch (e) {}
+if (savedTheme) setTheme(savedTheme);
+else if (window.matchMedia('(prefers-color-scheme: dark)').matches) setTheme('dark');
+if (savedLang && savedLang !== 'es') setLang(savedLang);
+</script>
+</body>
+</html>
