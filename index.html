@@ -140,9 +140,10 @@
     min-height: 100vh; display: flex; align-items: center;
     position: relative; padding: 120px 0 80px;
   }
+  .hero .wrap { width: 100%; }
   .hero-enso {
     position: absolute; right: 6%; top: 50%; transform: translateY(-50%);
-    width: min(46vw, 560px); height: min(46vw, 560px);
+    width: min(42vw, 520px); height: min(42vw, 520px);
     z-index: -1; opacity: 0.95;
   }
   .hero-enso .enso {
@@ -170,7 +171,7 @@
   .hero-kanji b { color: var(--vermillion); font-weight: 500; }
   @keyframes fadeIn { to { opacity: 0.75; } }
 
-  .hero-content { max-width: 720px; }
+  .hero-content { max-width: min(680px, 50vw); }
   .hero-pre {
     font-family: var(--mono); font-size: 0.8rem; color: var(--jade);
     margin-bottom: 22px; letter-spacing: 0.05em;
@@ -441,7 +442,8 @@
     nav { display: none; }
     .path-grid { grid-template-columns: 1fr; gap: 40px; }
     .hero-kanji { display: none; }
-    .hero-enso { right: -40%; opacity: 0.6; }
+    .hero-enso { right: -40%; opacity: 0.6; width: min(62vw, 560px); height: min(62vw, 560px); }
+    .hero-content { max-width: 100%; }
     .teach-item { grid-template-columns: 1fr; gap: 6px; }
     section { padding: 80px 0; }
   }
@@ -482,7 +484,8 @@
   </svg>
   <div class="hero-kanji" aria-hidden="true">心 · <b>道</b> · 技 · 学</div>
 
-  <div class="wrap hero-content">
+  <div class="wrap">
+  <div class="hero-content">
     <div class="hero-pre"><span data-i18n="hero.pre">~/mente × tecnología × aprendizaje</span><span class="cursor"></span></div>
     <h1>Diego Urzúa <em>Escobar</em></h1>
     <p class="hero-role" data-i18n="hero.role">Psicólogo educacional · Investigador · Facilitador</p>
@@ -492,6 +495,7 @@
       <a href="#camino" class="btn btn-ghost" data-i18n="hero.cta2">Conoce mi camino</a>
     </div>
     <div class="seal" title="迪 · Dí (Diego)">迪</div>
+  </div>
   </div>
   <div class="scroll-hint"><span data-i18n="hero.scroll">desplázate</span></div>
 </section>
@@ -540,7 +544,7 @@
       </div>
     </div>
     <div class="zen-quote reveal">
-      <blockquote data-i18n="quote.text">«No puedes detener las olas, pero puedes aprender a surfear.»</blockquote>
+      <blockquote data-i18n="quote.text">«Dondequiera que vayas, ahí estás.»</blockquote>
       <cite data-i18n="quote.author">Jon Kabat-Zinn</cite>
     </div>
   </div>
@@ -775,7 +779,7 @@ const I18N = {
     'pillar1.title': 'Quietud', 'pillar1.text': 'Presencia y escucha. Diseñar con calma, observar sin juicio, simplificar lo complejo.',
     'pillar2.title': 'Tecnología', 'pillar2.text': 'IA local, análisis de datos en R y SPSS, y herramientas digitales al servicio del aprendizaje.',
     'pillar3.title': 'Academia', 'pillar3.text': 'Rigor metodológico, ética en investigación y ciencia abierta como brújula del conocimiento.',
-    'quote.text': '«No puedes detener las olas, pero puedes aprender a surfear.»',
+    'quote.text': '«Dondequiera que vayas, ahí estás.»',
     'quote.author': 'Jon Kabat-Zinn',
     'acad.label': 'Academia e investigación', 'acad.title': 'Investigar es una práctica de atención',
     'acad.sub': 'Investigación en psicología educacional, lenguaje e infancia, con datos cuantitativos y cualitativos.',
@@ -850,7 +854,7 @@ const I18N = {
     'pillar1.title': 'Stillness', 'pillar1.text': 'Presence and listening. Designing calmly, observing without judgment, simplifying the complex.',
     'pillar2.title': 'Technology', 'pillar2.text': 'Local AI, data analysis in R and SPSS, and digital tools in the service of learning.',
     'pillar3.title': 'Academia', 'pillar3.text': 'Methodological rigor, research ethics and open science as a compass for knowledge.',
-    'quote.text': '"You can\'t stop the waves, but you can learn to surf."',
+    'quote.text': '"Wherever you go, there you are."',
     'quote.author': 'Jon Kabat-Zinn',
     'acad.label': 'Academia & Research', 'acad.title': 'Research is a practice of attention',
     'acad.sub': 'Research in educational psychology, language and childhood, with quantitative and qualitative data.',
@@ -925,7 +929,7 @@ const I18N = {
     'pillar1.title': '静', 'pillar1.text': '临在与倾听。从容地设计,不带评判地观察,化繁为简。',
     'pillar2.title': '技', 'pillar2.text': '本地AI、R与SPSS数据分析,以及服务于学习的数字工具。',
     'pillar3.title': '学', 'pillar3.text': '方法论的严谨、研究伦理与开放科学,是求知的指南针。',
-    'quote.text': '「你无法阻止海浪,但你可以学会冲浪。」',
+    'quote.text': '「无论走到哪里,你都在那里。」',
     'quote.author': '乔恩·卡巴金 · Jon Kabat-Zinn',
     'acad.label': '学术与研究', 'acad.title': '研究,是一种专注的练习',
     'acad.sub': '教育心理学、语言与儿童发展研究,兼用定量与定性数据。',
